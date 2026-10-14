@@ -1,0 +1,16 @@
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ?? ''
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY ?? ''
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn(
+    '[SkillBridge] Supabase credentials not configured. ' +
+    'Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file. ' +
+    'The app will run in demo mode.'
+  )
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
+export const isDemoMode = !supabaseUrl || !supabaseAnonKey
